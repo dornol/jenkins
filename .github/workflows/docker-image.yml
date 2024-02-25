@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag kkkqwerasdf123/jenkins-kubectl:latest
+    - name: Login Docker Hub
+      run: echo "DOCKERHUB_ACCESS_TOKEN" | docker login -u kkkqwerasdf123 --password-stdin
+      env:
+        DOCKERHUB_ACCESS_TOKEN: ${{secrets.DOCKERHUB_ACCESS_TOKEN}}
+    - name: Push the Docker image
+      run: docker push kkkqwerasdf123/jenkins-kubectl:latest
