@@ -17,7 +17,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag kkkqwerasdf123/jenkins-kubectl:latest
     - name: Login Docker Hub
-      run: echo "DOCKERHUB_ACCESS_TOKEN" | docker login -u kkkqwerasdf123 --password-stdin
+      run: echo "$DOCKERHUB_ACCESS_TOKEN" | docker login -u kkkqwerasdf123 --password-stdin
       env:
         DOCKERHUB_ACCESS_TOKEN: ${{secrets.DOCKERHUB_ACCESS_TOKEN}}
     - name: Push the Docker image
